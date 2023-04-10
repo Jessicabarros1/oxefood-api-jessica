@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -15,26 +18,25 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public abstract class EntidadeAuditavel extends EntidadeNegocio {
-
+  
    @JsonIgnore
    @Version
    private Long versao;
 
    @JsonIgnore
-   @Version
-    private LocalDate dataCriacao;
+   @CreatedDate
+   private LocalDate dataCriacao;
 
    @JsonIgnore
-   @Version
-    private LocalDate dataUltimaModificacao;
-
-    @JsonIgnore
-    @Column 
-    private Long criadoPor; // Id do usuário que o criou
+   @LastModifiedDate
+   private LocalDate dataUltimaModificacao;
 
    @JsonIgnore
    @Column
-    private Long ultimaModificacaoPor; // Id do usuário que fez a última alteração
+   private Long criadoPor; // Id do usuário que o criou
+
+   @JsonIgnore
+   @Column
+   private Long ultimaModificacaoPor; // Id do usuário que fez a última alteração
 
 }
-
