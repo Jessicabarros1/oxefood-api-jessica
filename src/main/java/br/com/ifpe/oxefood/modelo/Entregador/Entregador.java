@@ -42,7 +42,7 @@ public class Entregador extends EntidadeAuditavel  {
    @Column
    private Integer qtdEntregasRealizadas;
    @Column
-   private Double Valorfrete;
+   private Double valorFrete;
    @Column
    private String enderecoRua;
    @Column

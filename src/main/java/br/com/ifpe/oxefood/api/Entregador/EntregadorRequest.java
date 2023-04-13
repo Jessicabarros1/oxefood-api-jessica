@@ -31,7 +31,7 @@ public class EntregadorRequest {
 
    private Integer qtdEntregasRealizadas;
 
-   private Double Valorfrete;
+   private Double valorFrete;
 
    private String enderecoRua;
 
@@ -59,7 +59,7 @@ public class EntregadorRequest {
                .foneCelular(foneCelular)
                .foneFixo(foneFixo)
                .qtdEntregasRealizadas(qtdEntregasRealizadas)
-               .Valorfrete(Valorfrete)
+               .valorFrete(valorFrete)
                .enderecoRua(enderecoRua)
                .enderecoNumero(enderecoBairro)
                .enderecoBairro(enderecoBairro)
