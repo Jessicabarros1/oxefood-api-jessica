@@ -16,13 +16,13 @@ public class MaterialService extends GenericService {
    private MaterialRepository repository;
 
    @Transactional
-   public Material save(Material Material) {
+   public Material save(Material material) {
 
-       super.preencherCamposAuditoria(Material);
-       return repository.save(Material);
+       super.preencherCamposAuditoria(material);
+       return repository.save(material);
    }
 
-   public List<Material> listarTodos() {
+   public List< Material > listarTodos() {
   
     return repository.findAll();
 }
