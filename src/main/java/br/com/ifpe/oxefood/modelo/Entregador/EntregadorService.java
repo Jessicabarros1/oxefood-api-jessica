@@ -57,4 +57,14 @@ public void update(Long id, Entregador EntregadorAlterado) {
    repository.save(Entregador);
 
 }
+@Transactional
+   public void delete(Long id) {
+
+      Entregador entregador = repository.findById(id).get();
+       entregador.setHabilitado(Boolean.FALSE);
+       super.preencherCamposAuditoria(entregador);
+
+       repository.save(entregador);
+   }
+
 }
