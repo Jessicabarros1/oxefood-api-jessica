@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
+import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
+import br.com.ifpe.oxefood.modelo.cliente.EnderecoClienteRequest;
 import br.com.ifpe.oxefood.util.entity.GenericController;
 
 @RestController
@@ -27,11 +29,16 @@ public class ProdutoController extends GenericController {
    @Autowired
    private ProdutoService ProdutoService;
 
+   @Autowired
+   private CategoriaProdutoService categoriaProdutoService;
+
    @PostMapping
    public ResponseEntity<Produto> save(@RequestBody @Valid ProdutoRequest request) {
 
-       Produto Produto = ProdutoService.save(request.build());
-       return new ResponseEntity<Produto>(Produto, HttpStatus.CREATED);
+       Produto produtoNovo = request.build();
+       produtoNovo.setCategoria(CategoriaProdutoService.obterPorID(request.getIdCategoria()));
+       Produto produto = produtoService.save(produtoNovo);
+       return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
    }
 
    @GetMapping
@@ -49,8 +56,9 @@ public class ProdutoController extends GenericController {
    @PutMapping("/{id}")
    public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
 
-       ProdutoService.update(id, request.build());
-       return ResponseEntity.ok().build();
+      Produto produto = request.build();
+       produto.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
+       produtoService.update(id, produto);
    }
 
     @DeleteMapping("/{id}")
@@ -58,6 +66,28 @@ public class ProdutoController extends GenericController {
 
        ProdutoService.delete(id);
        return ResponseEntity.ok().build();
+
+
+       @PostMapping("/endereco/{clienteId}")
+   public ResponseEntity<EnderecoCliente> adicionarEnderecoCliente(@PathVariable("clienteId") Long clienteId, @RequestBody @Valid EnderecoClienteRequest request) {
+
+       EnderecoCliente endereco = clienteService.adicionarEnderecoCliente(clienteId, request.build());
+       return new ResponseEntity<EnderecoCliente>(endereco, HttpStatus.CREATED);
+   }
+
+   @PutMapping("/endereco/{enderecoId}")
+   public ResponseEntity<EnderecoCliente> atualizarEnderecoCliente(@PathVariable("enderecoId") Long enderecoId, @RequestBody EnderecoClienteRequest request) {
+
+       EnderecoCliente endereco = clienteService.atualizarEnderecoCliente(enderecoId, request.build());
+       return new ResponseEntity<EnderecoCliente>(endereco, HttpStatus.OK);
+   }
+  
+   @DeleteMapping("/endereco/{enderecoId}")
+   public ResponseEntity<Void> removerEnderecoCliente(@PathVariable("enderecoId") Long enderecoId) {
+
+       clienteService.removerEnderecoCliente(enderecoId);
+       return ResponseEntity.noContent().build();
+
 
 
 }
