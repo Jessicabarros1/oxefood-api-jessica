@@ -22,6 +22,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
+
 public class EnderecoClienteRequest {
 
    private String rua;

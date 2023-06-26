@@ -109,7 +109,7 @@ public void update(Long id, Cliente clienteAlterado) {
        this.save(cliente);
       
        return endereco;
-
+    }
   
 
 }
