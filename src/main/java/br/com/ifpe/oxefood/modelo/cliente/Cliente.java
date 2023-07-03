@@ -31,7 +31,7 @@ import lombok.Setter;
 public class Cliente extends EntidadeAuditavel  {
 
     @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
-   private List<EnderecoCliente> enderecos;
+    private List<EnderecoCliente> enderecos;
 
    @Column
    private String nome;
