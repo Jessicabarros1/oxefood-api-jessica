@@ -34,11 +34,11 @@ public class Cliente extends EntidadeAuditavel  {
     private List<EnderecoCliente> enderecos;
 
    @Column
-   private String nome;
+   private String nome (nullable = false, length = 100);
    @Column
    private LocalDate dataNascimento;
    @Column
-   private String cpf;
+   private String cpf(unique = true);
    @Column
    private String foneCelular;
    @Column
