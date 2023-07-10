@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+
 @Entity
 @Table(name = "Cliente")
 @Where(clause = "habilitado = true")
@@ -28,6 +29,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Cliente extends EntidadeAuditavel  {
 
     @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
